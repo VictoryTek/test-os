@@ -4,6 +4,7 @@
 # Not included in the main recipe by default. To use, add:
 #   - from-file: module-recipes/lix.yml
 # to your recipe's modules (remove the existing nix.yml line to avoid duplicate installs).
-type: script
-scripts:
-  - install-lix.sh
+modules:
+  - type: script
+    scripts:
+      - files/scripts/install-lix.sh
