@@ -1,0 +1,46 @@
+---
+# yaml-language-server: $schema=https://schema.blue-build.org/module-v1.json
+# Installs multi-user Nix on an ostree/atomic based image (Bazzite/Fedora style)
+# using the Determinate Systems installer with persistent store in /var/lib/nix.
+# Rationale: Root filesystem is immutable at runtime; /var is mutable and preserved across deployments.
+# Idempotent: skips if nix already present.
+modules:
+  - type: script
+    scripts:
+      - |
+        set -euo pipefail
+        echo "[nix-install] Starting Determinate Systems Nix install (ostree mode)"
+        if command -v nix >/dev/null 2>&1; then
+          echo "[nix-install] nix already in PATH, skipping"
+          exit 0
+        fi
+        # Ensure curl exists (added via dnf module); double-check for safety
+        command -v curl >/dev/null 2>&1 || { echo "curl missing"; exit 1; }
+        # Create persistence directory early
+        mkdir -p /var/lib/nix
+        # Optimize for btrfs (ignore errors if unsupported)
+        if [ "$(stat -f -c %T /var/lib/nix 2>/dev/null || echo unknown)" = "btrfs" ]; then
+          chattr +C /var/lib/nix 2>/dev/null || true
+        fi
+        # Run Determinate Systems installer in ostree mode with explicit persistence path
+        echo "[nix-install] Fetching installer"
+        curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix \
+          | sh -s -- install ostree --no-confirm --persistence=/var/lib/nix
+        # Provide a stable profile sourcing script (the installer usually sets this up, but we ensure it)
+        mkdir -p /etc/profile.d
+        cat >/etc/profile.d/nix.sh <<'EOF'
+        # Added by image build: source Nix daemon profile if present
+        if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
+          . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+        fi
+        EOF
+        chmod 0644 /etc/profile.d/nix.sh
+        echo "[nix-install] Completed Determinate Systems installer run"
+        # Basic smoke test (won't fail build if it errors, but logs output)
+        if [ -x /nix/var/nix/profiles/default/bin/nix ]; then
+          /nix/var/nix/profiles/default/bin/nix --version || true
+        fi
+        # Ensure nix-daemon socket/unit enabled (preset will handle on first boot; this is a best-effort runtime enable during image build)
+        if command -v systemctl >/dev/null 2>&1; then
+          systemctl enable nix-daemon.socket 2>/dev/null || true
+        fi

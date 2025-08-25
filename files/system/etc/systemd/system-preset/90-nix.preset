@@ -1,0 +1,2 @@
+enable nix-daemon.socket
+# You can add more enables here if needed later

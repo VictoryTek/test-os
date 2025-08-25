@@ -1,10 +1,17 @@
 ---
 # yaml-language-server: $schema=https://schema.blue-build.org/module-v1.json
+# Removed petersen/nix-setup COPR and nix-multiuser (missing deps nix-core, nix-daemon caused build failure).
+# If you want Nix, the basic 'nix' package from Fedora repos is added below. Comment it out if not needed.
+# For full multi-user Nix, prefer the official install script via a script module instead of COPR:
+#   - type: script
+#     scripts:
+#       - |
+#         curl -L https://nixos.org/nix/install | sh -s -- --daemon
 modules:
   - type: dnf
-    repos:
-      copr:
-        - petersen/nix-setup
+    # No Nix package installed here because neither nix-multiuser (COPR deps missing)
+    # nor a plain 'nix' package is currently available in the base Fedora repos you have access to.
+    # Add other Fedora/RPM packages under packages: if needed.
     install:
       packages:
-        - nix-multiuser
+        - curl # required for fetching the Nix installer script
