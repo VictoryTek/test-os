@@ -4,3 +4,6 @@ type: files
 files:
   - source: system
     destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
+  - source: system/usr/libexec/ublue-motd
+    destination: /usr/libexec/ublue-motd
+    mode: 0755
