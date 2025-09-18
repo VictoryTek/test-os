@@ -1,18 +1,38 @@
+#{
+#  "logo": {
+#    "type": "image_from_file",
+#    "source": "/etc/fastfetch/fastfetch-logo.png",
+#    "paddingLeft": 2
+#  },
+#  "info": {
+#    "username": true,
+#    "hostname": true,
+#    "os": true,
+#    "kernel": true,
+#    "uptime": true,
+#    "packages": true,
+#    "shell": true,
+#    "wm": true,
+#    "terminal": true
+#  }
+#}
+
 {
-  "logo": {
-    "type": "image_from_file",
-    "source": "/etc/fastfetch/logo.png",
-    "paddingLeft": 2
-  },
-  "info": {
-    "username": true,
-    "hostname": true,
-    "os": true,
-    "kernel": true,
-    "uptime": true,
-    "packages": true,
-    "shell": true,
-    "wm": true,
-    "terminal": true
-  }
+    // Disable built-in logo
+    "logo": {
+        "type": "ascii",
+        "source": "/etc/fastfetch/logo.txt", // point to your custom ASCII logo file
+        "paddingLeft": 2
+    },
+
+    // Info modules to display under logo
+    "modules": [
+        { "key": "OS", "type": "os" },
+        { "key": "Kernel", "type": "kernel" },
+        { "key": "Uptime", "type": "uptime" },
+        { "key": "Packages", "type": "packages" },
+        { "key": "Shell", "type": "shell" },
+        { "key": "WM/DE", "type": "wm" },
+        { "key": "Terminal", "type": "terminal" }
+    ]
 }
