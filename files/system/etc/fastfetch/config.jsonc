@@ -2,7 +2,7 @@
     // Disable built-in logo
     "logo": {
         "type": "ascii",
-        "source": "/etc/fastfetch/logo.txt", // point to your custom ASCII logo file
+        "source": "/etc/fastfetch/logo.png", // point to your custom ASCII logo file
         "paddingLeft": 2
     },
 
