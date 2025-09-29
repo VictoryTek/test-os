@@ -31,28 +31,28 @@ modules:
         - repo: epel
           packages:
             - just
-        - cockpit-machines
-        - cockpit-networkmanager
-        - cockpit-podman
-        - cockpit-selinux
-        - cockpit-storaged
-        - cockpit-system
-        - firewalld
-        - git-core
-        - libvirt-client
-        - libvirt-daemon
-        - libvirt-daemon-kvm
-        - NetworkManager-wifi
-        - open-vm-tools
-        - pcp-zeroconf
-        - qemu-guest-agent
-        - rsync
-        - systemd-resolved
-        - udisks2-lvm2
-        - virt-install
-        - xdg-user-dirs
-        - tailscale
-        - ublue-os-libvirt-workarounds
+            - cockpit-machines
+            - cockpit-networkmanager
+            - cockpit-podman
+            - cockpit-selinux
+            - cockpit-storaged
+            - cockpit-system
+            - firewalld
+            - git-core
+            - libvirt-client
+            - libvirt-daemon
+            - libvirt-daemon-kvm
+            - NetworkManager-wifi
+            - open-vm-tools
+            - pcp-zeroconf
+            - qemu-guest-agent
+            - rsync
+            - systemd-resolved
+            - udisks2-lvm2
+            - virt-install
+            - xdg-user-dirs
+            - tailscale
+            - ublue-os-libvirt-workarounds
     
   - type: dnf
     remove:
