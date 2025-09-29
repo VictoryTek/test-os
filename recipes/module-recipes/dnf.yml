@@ -53,6 +53,7 @@ modules:
             - xdg-user-dirs
             - tailscale
             - ublue-os-libvirt-workarounds
+            - ublue-os-just
     
   - type: dnf
     remove:
