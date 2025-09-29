@@ -1,17 +1,60 @@
 ---
 # yaml-language-server: $schema=https://schema.blue-build.org/module-v1.json
-# Removed petersen/nix-setup COPR and nix-multiuser (missing deps nix-core, nix-daemon caused build failure).
-# If you want Nix, the basic 'nix' package from Fedora repos is added below. Comment it out if not needed.
-# For full multi-user Nix, prefer the official install script via a script module instead of COPR:
-#   - type: script
-#     scripts:
-#       - |
-#         curl -L https://nixos.org/nix/install | sh -s -- --daemon
+
 modules:
   - type: dnf
-    # No Nix package installed here because neither nix-multiuser (COPR deps missing)
-    # nor a plain 'nix' package is currently available in the base Fedora repos you have access to.
-    # Add other Fedora/RPM packages under packages: if needed.
     install:
       packages:
-        - curl # required for fetching the Nix installer script
+        - epel-release
+    remove:
+      packages:
+        - adcli
+        - libdnf-plugin-subscription-manager
+        - python3-subscription-manager-rhsm
+        - subscription-manager
+        - subscription-manager-rhsm-certificates
+        - toolbox
+        - yggdrasil
+
+  - type: dnf
+    repos:
+      cleanup: true
+      files:
+        - tailscale.repo
+      copr: 
+        - ublue-os/packages
+      keys:
+        - tailscale.asc
+    install:
+      install-weak-deps: false
+      packages:
+        - repo: epel
+          packages:
+            - just
+        - cockpit-machines
+        - cockpit-networkmanager
+        - cockpit-podman
+        - cockpit-selinux
+        - cockpit-storaged
+        - cockpit-system
+        - firewalld
+        - git-core
+        - libvirt-client
+        - libvirt-daemon
+        - libvirt-daemon-kvm
+        - NetworkManager-wifi
+        - open-vm-tools
+        - pcp-zeroconf
+        - qemu-guest-agent
+        - rsync
+        - systemd-resolved
+        - udisks2-lvm2
+        - virt-install
+        - xdg-user-dirs
+        - tailscale
+        - ublue-os-libvirt-workarounds
+    
+  - type: dnf
+    remove:
+      packages:
+        - epel-release
