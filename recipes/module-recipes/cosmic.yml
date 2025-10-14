@@ -1,17 +1,12 @@
 ---
 modules:
+  # Latest build
   - type: dnf
-    source: local
     repos:
-      cosmic-epoch:
-        name: COSMIC Epoch COPR
-        baseurl: https://download.copr.fedorainfracloud.org/results/ryanabx/cosmic-epoch/fedora-40-x86_64/
-        enabled: true
-        gpgcheck: 0
-
-  # --- Install & Remove Packages ---
-  - type: dnf
-    source: local
+      cleanup: true
+      copr:
+        - ryanabx/cosmic-epoch
+        
     install:
       # Core COSMIC desktop
       - cosmic-desktop
