@@ -6,7 +6,7 @@ name: vex-test-os
 description: This is my personal OS image.
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: quay.io/centos-bootc/centos-bootc
+base-image: ghcr.io/ublue-os/bazzite-gnome
 image-version: c10s # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
@@ -20,6 +20,7 @@ modules:
 
   - from-file: module-recipes/files.yml
   - from-file: module-recipes/dnf.yml
+  - from-file: module-recipes/cosmic.yml
   #- from-file: module-recipes/yafti.yml
   
   - type: signing # this sets up the proper policy & signing files for signed images to work fully

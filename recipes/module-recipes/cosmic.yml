@@ -1,0 +1,46 @@
+modules:
+  - type: dnf
+    repos:
+      - id: cosmic-epoch
+        name: COSMIC Epoch COPR
+        baseurl: https://copr.fedorainfracloud.org/coprs/ryanabx/cosmic-epoch/repo/fedora-$releasever/$(uname -m)/
+        enabled: true
+        gpgcheck: 1
+
+  # --- Install / Remove Packages ---
+  - type: dnf
+    install:
+      # Core COSMIC desktop
+      - cosmic-desktop
+      - cosmic-session
+      - cosmic-settings
+      - cosmic-greeter
+      - cosmic-apps
+
+      # System76 utilities (optional)
+      - system76-power
+      - system76-driver
+
+    remove:
+      # Remove GNOME components to prevent conflicts
+      - gnome-shell
+      - gnome-session
+      - gnome-control-center
+      - gnome-terminal
+      - gnome-shell-extension*
+      - mutter
+
+  # --- Systemd Setup ---
+  - type: systemd
+    systemd:
+      enable:
+        - cosmic-greeter.service
+      disable:
+        - gdm.service
+      set-default: graphical.target
+
+  # --- Custom Files (your existing branding, wallpapers, etc.) ---
+  - type: files
+    files:
+      - source: files/system
+        destination: /usr/share

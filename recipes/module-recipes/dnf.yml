@@ -1,61 +1,57 @@
 ---
 # yaml-language-server: $schema=https://schema.blue-build.org/module-v1.json
-
 modules:
   - type: dnf
-    install:
-      packages:
-        - epel-release
-    remove:
-      packages:
-        - adcli
-        - libdnf-plugin-subscription-manager
-        - python3-subscription-manager-rhsm
-        - subscription-manager
-        - subscription-manager-rhsm-certificates
-        - toolbox
-        - yggdrasil
-
-  - type: dnf
+    #source: ghcr.io/blue-build/modules/dnf:dnf-module
     repos:
-      cleanup: true
+      cleanup: false # clean up added repos after module is done
       files:
-        - tailscale.repo
-      copr: 
-        - ublue-os/packages
-      keys:
-        - tailscale.asc
-    install:
-      install-weak-deps: false
-      packages:
-        - repo: epel
-          packages:
-            - just
-        - cockpit-machines
-        - cockpit-networkmanager
-        - cockpit-podman
-        - cockpit-selinux
-        - cockpit-storaged
-        - cockpit-system
-        - firewalld
-        - git-core
-        - libvirt-client
-        - libvirt-daemon
-        - libvirt-daemon-kvm
-        - NetworkManager-wifi
-        - open-vm-tools
-        - pcp-zeroconf
-        - qemu-guest-agent
-        - rsync
-        - systemd-resolved
-        - udisks2-lvm2
-        - virt-install
-        - xdg-user-dirs
-        - tailscale
-        - ublue-os-libvirt-workarounds
-        - ublue-os-just
-    
-  - type: dnf
+        - https://download.docker.com/linux/fedora/docker-ce.repo
+
+      copr:
+        - gloriouseggroll/nobara-42
+        - peterwu/rendezvous
+
+      # Put any repo GPG keys here
+
     remove:
+      packages:  
+        - waydroid
+        - waydroid-selinux    
+
+    install:
       packages:
-        - epel-release
+        # System Utilities
+        - blivet-gui
+        - cockpit
+        - fastfetch
+        - ImageMagick
+        - inxi
+        - pavucontrol
+        - tailscale
+        - trayscale
+        - tmux
+
+        # Terminal & Shell Enhancements
+        - ghostty                                             # gloriouseggroll/nobara-42
+        - starship                                            # gloriouseggroll/nobara-42
+
+        # Container Tools & Docker
+        - buildah
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+        - docker-buildx-plugin
+        - docker-compose-plugin
+        - skopeo
+
+        # Optional Packages:
+        - guestfs-tools
+        - python3-libguestfs
+
+    #     # Group installs
+    # group-install:
+    #   with-optional: true
+    #   packages:
+    #     - virtualization
+
