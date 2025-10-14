@@ -1,14 +1,17 @@
 modules:
+  # --- Add COSMIC repo ---
   - type: dnf
+    source: local
     repos:
-      - id: cosmic-epoch
+      cosmic-epoch:
         name: COSMIC Epoch COPR
         baseurl: https://copr.fedorainfracloud.org/coprs/ryanabx/cosmic-epoch/repo/fedora-$releasever/$(uname -m)/
         enabled: true
-        gpgcheck: 1
+        gpgcheck: 0
 
-  # --- Install / Remove Packages ---
+  # --- Install & Remove Packages ---
   - type: dnf
+    source: local
     install:
       # Core COSMIC desktop
       - cosmic-desktop
@@ -30,8 +33,9 @@ modules:
       - gnome-shell-extension*
       - mutter
 
-  # --- Systemd Setup ---
+  # --- Systemd Configuration ---
   - type: systemd
+    source: local
     systemd:
       enable:
         - cosmic-greeter.service
@@ -39,8 +43,9 @@ modules:
         - gdm.service
       set-default: graphical.target
 
-  # --- Custom Files (your existing branding, wallpapers, etc.) ---
+  # --- Copy Your Custom Files (wallpapers, plymouth, etc.) ---
   - type: files
+    source: local
     files:
       - source: files/system
         destination: /usr/share
