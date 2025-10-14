@@ -1,11 +1,11 @@
+---
 modules:
-  # --- Add COSMIC repo ---
   - type: dnf
     source: local
     repos:
       cosmic-epoch:
         name: COSMIC Epoch COPR
-        baseurl: https://copr.fedorainfracloud.org/coprs/ryanabx/cosmic-epoch/repo/fedora-$releasever/$(uname -m)/
+        baseurl: https://download.copr.fedorainfracloud.org/results/ryanabx/cosmic-epoch/fedora-40-x86_64/
         enabled: true
         gpgcheck: 0
 
