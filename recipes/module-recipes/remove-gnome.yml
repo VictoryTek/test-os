@@ -1,0 +1,10 @@
+modules:
+  - type: dnf
+    remove:
+      packages:
+        - gnome-shell
+        - gnome-session
+        - gnome-control-center
+        - gnome-terminal
+        - gnome-shell-extension*
+        - mutter

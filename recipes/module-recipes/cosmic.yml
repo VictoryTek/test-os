@@ -1,39 +1,10 @@
----
 modules:
+  # Latest build
   - type: dnf
     repos:
-      cleanup: false
-
-      # Add the COSMIC Epoch COPR repo for Fedora 42
+      cleanup: true
       copr:
         - ryanabx/cosmic-epoch
-
-    remove:
-      packages:
-        # Remove GNOME components that conflict with COSMIC
-        - gnome-shell
-        - gnome-session
-        - gnome-control-center
-        - gnome-terminal
-        - gnome-shell-extension*
-        - mutter
-
     install:
       packages:
-        # Core COSMIC packages
         - cosmic-desktop
-        - cosmic-session
-        - cosmic-settings
-        - cosmic-greeter
-        - cosmic-apps
-
-        # Optional: System76 utilities
-        - system76-power
-        - system76-driver
-
-  # --- Set display manager and session defaults ---
-  - type: commands
-    commands:
-      - systemctl disable gdm.service
-      - systemctl enable cosmic-greeter.service
-      - systemctl set-default graphical.target
