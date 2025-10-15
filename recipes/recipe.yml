@@ -18,9 +18,9 @@ modules:
       ID: vex-test_os
       PRETTY_NAME: VexTestOS
 
+  - from-file: module-recipes/cosmic.yml
   - from-file: module-recipes/files.yml
   - from-file: module-recipes/dnf.yml
-  - from-file: module-recipes/cosmic.yml
   #- from-file: module-recipes/yafti.yml
   
   - type: signing # this sets up the proper policy & signing files for signed images to work fully

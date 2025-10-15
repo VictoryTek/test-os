@@ -1,38 +1,39 @@
 ---
+# yaml-language-server: $schema=https://schema.blue-build.org/module-v1.json
 modules:
   - type: dnf
-    source: local
     repos:
-      cosmic-epoch:
-        name: COSMIC Epoch COPR
-        baseurl: https://download.copr.fedorainfracloud.org/results/ryanabx/cosmic-epoch/fedora-40-x86_64/
-        enabled: true
-        gpgcheck: 0
+      cleanup: false
 
-    install:
-      # Core COSMIC desktop
-      - cosmic-desktop
-      - cosmic-session
-      - cosmic-settings
-      - cosmic-greeter
-      - cosmic-apps
-
-      # System76 utilities (optional)
-      - system76-power
-      - system76-driver
+      # Add the COSMIC Epoch COPR repo for Fedora 42
+      copr:
+        - ryanabx/cosmic-epoch
 
     remove:
-      # Remove GNOME components to prevent conflicts
-      - gnome-shell
-      - gnome-session
-      - gnome-control-center
-      - gnome-terminal
-      - gnome-shell-extension*
-      - mutter
+      packages:
+        # Remove GNOME components that conflict with COSMIC
+        - gnome-shell
+        - gnome-session
+        - gnome-control-center
+        - gnome-terminal
+        - gnome-shell-extension*
+        - mutter
 
-  # --- Systemd Configuration ---
+    install:
+      packages:
+        # Core COSMIC packages
+        - cosmic-desktop
+        - cosmic-session
+        - cosmic-settings
+        - cosmic-greeter
+        - cosmic-apps
+
+        # Optional: System76 utilities
+        - system76-power
+        - system76-driver
+
+  # --- Set display manager and session defaults ---
   - type: systemd
-    source: local
     systemd:
       enable:
         - cosmic-greeter.service
@@ -40,9 +41,8 @@ modules:
         - gdm.service
       set-default: graphical.target
 
-  # --- Copy Your Custom Files (wallpapers, plymouth, etc.) ---
+  # --- Optional custom system files, wallpapers, branding, etc. ---
   - type: files
-    source: local
     files:
       - source: files/system
         destination: /usr/share
