@@ -11,6 +11,7 @@ modules:
 
     remove:
       packages:  
+        - fastfetch
         - waydroid
         - waydroid-selinux    
 
@@ -19,6 +20,7 @@ modules:
         # System Utilities
         - blivet-gui
         - cockpit
+        - gtk4-layer-shell
         - ImageMagick
         - inxi
         - pavucontrol
