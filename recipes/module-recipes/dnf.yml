@@ -19,7 +19,6 @@ modules:
         # System Utilities
         - blivet-gui
         - cockpit
-        - fastfetch
         - ImageMagick
         - inxi
         - pavucontrol
