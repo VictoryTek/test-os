@@ -14,6 +14,9 @@ modules:
           packages:
             - ghostty
             - starship
-        - repo: copr:copr.fedorainfracloud.org:ublue-os/packages
+        - repo: copr:copr.fedorainfracloud.org:peterwu:rendezvous
+          packages:
+            - bibata-cursor-themes
+        - repo: copr:copr.fedorainfracloud.org:ublue-os:packages
           packages:
             - ublue-fastfetch
