@@ -6,13 +6,16 @@ modules:
         enable:
           - gloriouseggroll/nobara-42
           - peterwu/rendezvous
+          - ublue-os/packages
     install:
       packages:
         - repo: copr:copr.fedorainfracloud.org:gloriouseggroll:nobara-42
           packages:
-            - fastfetch
             - ghostty
             - starship
         - repo: copr:copr.fedorainfracloud.org:peterwu/rendezvous
           packages:
             - bibata-cursor-themes
+        - repo: copr:copr.fedorainfracloud.org:ublue-os/packages
+          packages:
+            - ublue-fastfetch
