@@ -5,7 +5,7 @@ modules:
       copr:
         enable:
           - gloriouseggroll/nobara-42
-          - peterwu/rendezvous
+          - mecattaf/duoRPM
           - ublue-os/packages
     install:
       packages:
@@ -13,7 +13,7 @@ modules:
           packages:
             - ghostty
             - starship
-        - repo: copr:copr.fedorainfracloud.org:peterwu/rendezvous
+        - repo: copr:copr.fedorainfracloud.org:mecattaf/duoRPM
           packages:
             - bibata-cursor-themes
         - repo: copr:copr.fedorainfracloud.org:ublue-os/packages
