@@ -1,21 +1,13 @@
+---
 modules:
-  - type: dnf
-    repos:
-      cleanup: false
-      copr:
-        - gloriouseggroll/nobara-42
-        - peterwu/rendezvous
-    config:
-      # Disable Fedora repos for this module’s transaction
-      disable_repos:
-        - fedora
-        - updates
-    install:
+type: dnf
+install:
+  packages:
+    - repo: copr:copr.fedorainfracloud.org:gloriouseggroll:nobara-42
       packages:
-        # Terminal & Shell Enhancements
-        - fastfetch                                           # gloriouseggroll/nobara-42
-        - ghostty                                             # gloriouseggroll/nobara-42
-        - starship                                            # gloriouseggroll/nobara-42
-
-        # Theming
-        - bibata-cursor-themes                                # peterwu/rendezvous
+        - fastfetch
+        - ghostty
+        - starship
+    - repo: copr:copr.fedorainfracloud.org:peterwu:rendezvous
+      packages:
+        - bibata-cursor-themes
