@@ -1,13 +1,18 @@
 ---
 modules:
   - type: dnf
+    repos:
+      copr:
+        enable:
+          - gloriouseggroll/nobara-42
+          - peterwu/rendezvous
     install:
       packages:
-        - repo: copr:copr.fedorainfracloud.org:gloriouseggroll:nobara-42
+        - repo: copr:gloriouseggroll/nobara-42
           packages:
             - fastfetch
             - ghostty
             - starship
-        - repo: copr:copr.fedorainfracloud.org:peterwu:rendezvous
+        - repo: copr:peterwu/rendezvous
           packages:
             - bibata-cursor-themes
