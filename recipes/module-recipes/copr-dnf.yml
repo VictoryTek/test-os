@@ -5,17 +5,15 @@ modules:
       copr:
         enable:
           - gloriouseggroll/nobara-42
-          - mecattaf/duoRPM
+          - peterwu/rendezvous
           - ublue-os/packages
     install:
-      packages:
+      packages:  
+        - bibata-cursor-themes
         - repo: copr:copr.fedorainfracloud.org:gloriouseggroll:nobara-42
           packages:
             - ghostty
             - starship
-        - repo: copr:copr.fedorainfracloud.org:mecattaf/duoRPM
-          packages:
-            - bibata-cursor-themes
         - repo: copr:copr.fedorainfracloud.org:ublue-os/packages
           packages:
             - ublue-fastfetch
