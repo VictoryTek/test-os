@@ -1,5 +1,4 @@
 ---
-# yaml-language-server: $schema=https://schema.blue-build.org/module-v1.json
 modules:
   - type: dnf
     repos:
@@ -34,15 +33,8 @@ modules:
 
   # --- Set display manager and session defaults ---
   - type: systemd
-    systemd:
-      enable:
-        - cosmic-greeter.service
-      disable:
-        - gdm.service
-      set-default: graphical.target
-
-  # --- Optional custom system files, wallpapers, branding, etc. ---
-  - type: files
-    files:
-      - source: files/system
-        destination: /usr/share
+    enable:
+      - cosmic-greeter.service
+    disable:
+      - gdm.service
+    set-default: graphical.target
