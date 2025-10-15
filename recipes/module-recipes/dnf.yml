@@ -2,15 +2,10 @@
 # yaml-language-server: $schema=https://schema.blue-build.org/module-v1.json
 modules:
   - type: dnf
-    #source: ghcr.io/blue-build/modules/dnf:dnf-module
     repos:
       cleanup: false # clean up added repos after module is done
       files:
         - https://download.docker.com/linux/fedora/docker-ce.repo
-
-      copr:
-        - gloriouseggroll/nobara-42
-        - peterwu/rendezvous
 
       # Put any repo GPG keys here
 
@@ -29,13 +24,8 @@ modules:
         - inxi
         - pavucontrol
         - tailscale
-        - trayscale
         - tmux
         - virtualbox-guest-additions
-
-        # Terminal & Shell Enhancements
-        - ghostty                                             # gloriouseggroll/nobara-42
-        - starship                                            # gloriouseggroll/nobara-42
 
         # Container Tools & Docker
         - buildah
