@@ -32,9 +32,8 @@ modules:
         - system76-driver
 
   # --- Set display manager and session defaults ---
-  - type: systemd
-    enable:
-      - cosmic-greeter.service
-    disable:
-      - gdm.service
-    set-default: graphical.target
+  - type: commands
+    commands:
+      - systemctl disable gdm.service
+      - systemctl enable cosmic-greeter.service
+      - systemctl set-default graphical.target
