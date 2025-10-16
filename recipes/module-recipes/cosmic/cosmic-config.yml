@@ -1,7 +1,7 @@
 modules:
   - type: files
     files:
-      - source: files/cosmic-config/
+      - source: cosmic-config/
         destination: /etc/skel/.config/cosmic/
         owner: root
         group: root
