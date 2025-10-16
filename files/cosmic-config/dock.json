@@ -1,0 +1,17 @@
+{
+  "position": "left",
+  "autohide": false,
+  "icon_size": 48,
+  "favorites": [
+    "com.brave.Browser.desktop",
+    "io.gitlab.librewolf-community.desktop",
+    "org.gnome.Nautilus.desktop",
+    "com.mitchellh.ghostty.desktop",
+    "system-update.desktop",
+    "org.gnome.Boxes.desktop",
+    "virt-manager.desktop",
+    "code.desktop",
+    "com.discordapp.Discord.desktop"
+  ]
+}
+

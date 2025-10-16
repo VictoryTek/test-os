@@ -1,0 +1,32 @@
+{
+  "theme": {
+    "color-scheme": "dark",
+    "accent-color": "teal",
+    "icon-theme": "kora",
+    "cursor-theme": "Bibata-Modern-Classic",
+    "cursor-size": 24
+  },
+  "favorites": [
+    "com.brave.Browser.desktop",
+    "io.gitlab.librewolf-community.desktop",
+    "org.gnome.Nautilus.desktop",
+    "com.mitchellh.ghostty.desktop",
+    "system-update.desktop",
+    "org.gnome.Boxes.desktop",
+    "virt-manager.desktop",
+    "code.desktop",
+    "com.discordapp.Discord.desktop"
+  ],
+  "background": {
+    "dark": "/usr/share/backgrounds/vex-dark.png",
+    "light": "/usr/share/backgrounds/vex-light.png"
+  },
+  "lockscreen": {
+    "enabled": false
+  },
+  "power": {
+    "sleep-ac": "nothing",
+    "sleep-battery": "nothing"
+  }
+}
+

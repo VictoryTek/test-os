@@ -1,0 +1,8 @@
+modules:
+  - type: files
+    files:
+      - source: files/cosmic-config/
+        destination: /etc/skel/.config/cosmic/
+        owner: root
+        group: root
+        mode: 0644

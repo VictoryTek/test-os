@@ -1,0 +1,15 @@
+{
+  "panels": [
+    {
+      "position": "top",
+      "alignment": "center",
+      "widgets": [
+        "launcher",
+        "taskbar",
+        "system-tray",
+        "clock"
+      ]
+    }
+  ]
+}
+

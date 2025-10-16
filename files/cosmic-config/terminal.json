@@ -1,0 +1,11 @@
+{
+  "font": "FiraCode Nerd Font 12",
+  "theme": "dark",
+  "cursor_shape": "block",
+  "opacity": 0.95,
+  "use_system_colors": true,
+  "palette": "teal",
+  "scrollback_lines": 10000,
+  "bell": "none"
+}
+
