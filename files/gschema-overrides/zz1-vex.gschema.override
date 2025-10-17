@@ -1,0 +1,36 @@
+#-------------- DESKTOP MODIFICATIONS --------------#
+
+
+# GDM Login Logo
+[org.gnome.login-screen]
+logo='/usr/share/pixmaps/vex.png'
+
+# Gnome Settings
+[org.gnome.desktop.interface]
+color-scheme='prefer-dark'
+accent-color='teal'
+icon-theme='kora'
+#icon-theme='Flat-Remix-Teal-Dark'
+cursor-theme='Bibata-Modern-Classic'
+cursor-size=24
+
+[org.gnome.shell.extensions.logo-widget]
+logo-file='/usr/share/pixmaps/vex.png'
+logo-file-dark='/usr/share/pixmaps/vex.png'
+
+[org.gnome.settings-daemon.plugins.power]
+sleep-inactive-ac-type='nothing'
+sleep-inactive-battery-type='nothing'
+
+[org.gnome.desktop.screensaver]
+lock-enabled=false
+
+# Dock Settings
+[org.gnome.shell]
+disable-user-extensions=false
+enabled-extensions=['AlphabeticalAppGrid@stuarthayhurst', 'appindicatorsupport@rgcjonas.gmail.com', 'background-logo@fedorahosted.org', 'caffeine@patapon.info', 'dash-to-dock@micxgx.gmail.com', 'gnome-ui-tune@itstime.tech', 'blur-my-shell@aunetx', 'just-perfection-desktop@just-perfection', 'nothing-to-say@extensions.gnome.wouter.bolsterl.ee', 'quick-settings-tweaks@qwreey', 'restartto@tiagoporsch.github.io', 'steal-my-focus-window@steal-my-focus-window', 'tailscale@joaophi.github.com', 'tailscale@joaophi.github.com', 'tilingshell@ferrarodomenico.com']
+
+favorite-apps=['com.brave.Browser.desktop', 'io.gitlab.librewolf-community.desktop', 'org.gnome.Nautilus.desktop', 'com.mitchellh.ghostty.desktop', 'system-update.desktop', 'org.gnome.Boxes.desktop', 'virt-manager.desktop', 'code.desktop', 'com.discordapp.Discord.desktop']
+
+[org.gnome.shell.extensions.dash-to-dock]
+dock-position='LEFT'
