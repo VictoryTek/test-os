@@ -3,3 +3,4 @@ scripts:
   - 01-purge-waydroid.sh
   - 02-kora-icon-theme.sh
   - 03-photogimp.sh
+  - 04-purge-autostart.sh
