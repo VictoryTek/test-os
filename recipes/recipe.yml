@@ -6,7 +6,7 @@ name: vex-test-os
 description: This is my personal OS image.
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/bazzite-gnome
+base-image: ghcr.io/ublue-os/base-main
 image-version: latest # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
@@ -18,15 +18,15 @@ modules:
       ID: vex-test_os
       PRETTY_NAME: VexTestOS
 
-  - from-file: module-recipes/cosmic/remove-gnome.yml
-  - from-file: module-recipes/cosmic/cosmic.yml
-  - from-file: module-recipes/cosmic/cosmic-greeter.yml
-  - from-file: module-recipes/cosmic/cosmic-config.yml
-  - from-file: module-recipes/files.yml
-  - from-file: module-recipes/gschema-overrides.yml
-  - from-file: module-recipes/dnf.yml
-  - from-file: module-recipes/copr-dnf.yml
-  - from-file: module-recipes/scripts.yml
+  #- from-file: module-recipes/cosmic/remove-gnome.yml
+  #- from-file: module-recipes/cosmic/cosmic.yml
+  #- from-file: module-recipes/cosmic/cosmic-greeter.yml
+  #- from-file: module-recipes/cosmic/cosmic-config.yml
+  #- from-file: module-recipes/files.yml
+  #- from-file: module-recipes/gschema-overrides.yml
+  #- from-file: module-recipes/dnf.yml
+  #- from-file: module-recipes/copr-dnf.yml
+  #- from-file: module-recipes/scripts.yml
   #- from-file: module-recipes/yafti.yml
   
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
