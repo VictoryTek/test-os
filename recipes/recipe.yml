@@ -18,6 +18,7 @@ modules:
       ID: vex-test_os
       PRETTY_NAME: VexTestOS
 
+  - from-file: module-recipes/nix-script.yml
   #- from-file: module-recipes/cosmic/remove-gnome.yml
   #- from-file: module-recipes/cosmic/cosmic.yml
   #- from-file: module-recipes/cosmic/cosmic-greeter.yml
