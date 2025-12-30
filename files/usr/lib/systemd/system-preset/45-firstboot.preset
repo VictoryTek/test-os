@@ -1,1 +1,1 @@
-enable firstboot-runner.service
+enable firstboot.service

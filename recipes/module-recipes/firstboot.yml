@@ -6,10 +6,12 @@ modules:
     files:
       - source: usr
         destination: /usr
-      - source: firstboot/
-        destination: /usr/lib/firstboot-scripts/tasks/
+      - source: firstboot/system/
+        destination: /usr/lib/firstboot-scripts/system/
+      - source: firstboot/user/
+        destination: /usr/lib/firstboot-scripts/user/
         
   - type: systemd
     system:
       enabled:
-        - firstboot-runner.service
+        - firstboot.service
