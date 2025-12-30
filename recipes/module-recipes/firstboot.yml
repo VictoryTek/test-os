@@ -1,9 +1,9 @@
 ---
 # yaml-language-server: $schema=https://schema.blue-build.org/module-stage-list-v1.json
 
-- type: firstboot
-  source: local
-
+- type: files
+  source: modules/firstboot
+  
 - type: files
   files:
     - source: files/firstboot/
