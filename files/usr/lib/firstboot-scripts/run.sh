@@ -13,9 +13,8 @@ echo "Running first boot tasks..."
 
 if [[ -d "$SCRIPT_DIR" ]]; then
     for script in "$SCRIPT_DIR"/*; do
-        if [[ -f "$script" ]]; then
+        if [[ -f "$script" && -x "$script" ]]; then
             echo "Executing $script"
-            chmod +x "$script"
             "$script"
         fi
     done

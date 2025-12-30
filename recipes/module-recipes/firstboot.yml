@@ -8,3 +8,8 @@ modules:
         destination: /usr
       - source: firstboot/
         destination: /usr/lib/firstboot-scripts/tasks/
+        
+  - type: systemd
+    system:
+      enabled:
+        - firstboot-runner.service
