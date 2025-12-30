@@ -4,7 +4,7 @@
 modules:
   - type: files
     files:
-      - source: modules/firstboot/files
-        destination: /
+      - source: files/usr
+        destination: /usr
       - source: files/firstboot/
         destination: /usr/lib/firstboot-scripts/tasks/
