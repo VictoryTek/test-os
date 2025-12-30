@@ -1,0 +1,12 @@
+[Unit]
+Description=Run custom first boot scripts
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/lib/firstboot-scripts/run.sh
+RemainAfterExit=no
+
+[Install]
+WantedBy=multi-user.target

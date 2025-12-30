@@ -1,0 +1,6 @@
+modules:
+  - from: modules/firstboot
+  - type: files
+    files:
+      - source: files/firstboot/
+        destination: /usr/lib/firstboot-scripts/tasks/

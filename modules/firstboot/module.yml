@@ -1,0 +1,6 @@
+name: firstboot
+description: Install first boot runner infrastructure
+type: files
+files:
+  - source: files/
+    destination: /
