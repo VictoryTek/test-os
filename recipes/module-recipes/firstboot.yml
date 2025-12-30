@@ -3,9 +3,8 @@
 
 modules:
   - type: files
-    source: modules/firstboot
-    
-  - type: files
     files:
+      - source: modules/firstboot/files
+        destination: /
       - source: files/firstboot/
         destination: /usr/lib/firstboot-scripts/tasks/
