@@ -2,8 +2,8 @@
 set -euo pipefail
 
 STAMP="/var/lib/firstboot-done"
-SYSTEM_SCRIPT_DIR="/usr/lib/firstboot-scripts/system"
-USER_SCRIPT_DIR="/usr/lib/firstboot-scripts/user"
+SYSTEM_SCRIPT_DIR="/usr/lib/firstboot-scripts/boot/system"
+USER_SCRIPT_DIR="/usr/lib/firstboot-scripts/boot/user"
 
 if [[ -f "$STAMP" ]]; then
     echo "First boot tasks already completed."

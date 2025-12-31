@@ -1,0 +1,11 @@
+[Unit]
+Description=Run custom first login scripts
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/lib/firstboot-scripts/run-login.sh
+RemainAfterExit=no
+
+[Install]
+WantedBy=default.target
