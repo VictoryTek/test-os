@@ -2,23 +2,14 @@
 # yaml-language-server: $schema=https://schema.blue-build.org/module-list-v1.json
 
 modules:
-  # Copy firstboot module infrastructure from modules/firstboot
-  - type: files
-    files:
-      - source: modules/firstboot/files/usr
-        destination: /usr
-  
-  # Copy firstboot scripts based on configuration
-  # mode: system (default when: boot) -> /usr/lib/firstboot-scripts/boot/system/
-  # mode: user (default when: boot) -> /usr/lib/firstboot-scripts/boot/user/
-  # mode: system, when: login -> /usr/lib/firstboot-scripts/login/system/
-  # mode: user, when: login -> /usr/lib/firstboot-scripts/login/user/
-  - type: files
-    files:
-      - source: firstboot/00-test.sh
-        destination: /usr/lib/firstboot-scripts/boot/system/00-test.sh
-      - source: firstboot/01-install-nix.sh
-        destination: /usr/lib/firstboot-scripts/login/user/01-install-nix.sh
+  - type: firstboot
+    source: local
+    scripts:
+      - name: 00-test.sh
+        mode: system
+      - name: 01-install-nix.sh
+        mode: user
+        when: login
         
   - type: systemd
     system:
@@ -27,11 +18,3 @@ modules:
     user:
       enabled:
         - firstboot-login.service
-
-firstboot:
-  scripts:
-    - name: 00-test.sh
-      mode: system
-    - name: 01-install-nix.sh
-      mode: user
-      when: login
