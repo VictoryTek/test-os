@@ -6,8 +6,13 @@ CONFIG="$1"
 
 echo "Installing firstboot module..."
 
-# Copy infrastructure files
-cp -r /modules/files/usr/* /usr/
+# Copy infrastructure files from local module
+if [[ -d /tmp/modules/firstboot/files/usr ]]; then
+    cp -r /tmp/modules/firstboot/files/usr/* /usr/
+else
+    echo "ERROR: Module files not found at /tmp/modules/firstboot/files/usr"
+    exit 1
+fi
 
 # Parse and copy scripts based on configuration
 SCRIPTS=$(echo "$CONFIG" | jq -r '.scripts[]? | @base64')
