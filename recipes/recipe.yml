@@ -26,8 +26,8 @@ modules:
   #- from-file: module-recipes/cosmic/cosmic-config.yml
   #- from-file: module-recipes/files.yml
   #- from-file: module-recipes/gschema-overrides.yml
-  #- from-file: module-recipes/dnf.yml
-  #- from-file: module-recipes/copr-dnf.yml
+  - from-file: module-recipes/dnf.yml
+  - from-file: module-recipes/dnf-copr.yml
   #- from-file: module-recipes/scripts.yml
   #- from-file: module-recipes/yafti.yml
   
