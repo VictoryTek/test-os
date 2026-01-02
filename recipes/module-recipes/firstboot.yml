@@ -3,7 +3,7 @@
 
 modules:
   - type: firstboot
-    from: ghcr.io/victorytek/firstboot:latest
+    source: local
     scripts:
       - name: 00-test.sh
         mode: system
