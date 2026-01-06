@@ -1,0 +1,70 @@
+---
+# yaml-language-server: $schema=https://schema.blue-build.org/module-v1.json
+modules:
+  - type: dnf
+    #source: ghcr.io/blue-build/modules/dnf:dnf-module
+    repos:
+      cleanup: false # clean up added repos after module is done
+      files:
+        - https://download.docker.com/linux/fedora/docker-ce.repo
+
+      copr:
+        - faugus/faugus-launcher
+        #- atim/starship
+        - gloriouseggroll/nobara-43
+        - scottames/ghostty
+        - peterwu/rendezvous
+
+      # Put any repo GPG keys here
+
+    install:
+      packages:
+      # System Utilities
+        - blivet-gui
+        - cockpit
+        - fastfetch
+        - grsync
+        - inxi
+        - pavucontrol
+        - tailscale
+        - tmux
+
+      # GNOME & Theming
+        - bibata-cursor-themes                                 # peterwu/rendezvous
+        - gnome-tweaks
+
+      # Terminal & Shell Enhancements
+        - ghostty                                              # scottames/ghostty
+        - starship                                             # gloriouseggroll/nobara-43
+
+      # Gaming Utilities
+        - faugus-launcher                                      # faugus/faugus-launcher
+        - gamemode
+
+      # Container Tools & Docker
+        - buildah
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+        - docker-buildx-plugin
+        - docker-compose-plugin
+        - skopeo
+
+      # Dev Tool Packages:
+        #- flatpak-builder
+        - gtk4-devel
+        - libadwaita-devel 
+        - glib2-devel 
+        - cairo-devel
+        - pango-devel 
+        - gdk-pixbuf2-devel 
+        - rust
+        - cargo
+        - gcc
+        - pkg-config
+
+      # Group installs
+    group-install:
+      with-optional: true
+      packages:
+        - virtualization
