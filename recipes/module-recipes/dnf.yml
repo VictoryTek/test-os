@@ -8,12 +8,12 @@ modules:
       files:
         - https://download.docker.com/linux/fedora/docker-ce.repo
 
-      copr:
-        - faugus/faugus-launcher
+      #copr:
+        #- faugus/faugus-launcher
         #- atim/starship
-        - gloriouseggroll/nobara-43
-        - scottames/ghostty
-        - peterwu/rendezvous
+        #- gloriouseggroll/nobara-43
+        #- scottames/ghostty
+        #- peterwu/rendezvous
 
       # Put any repo GPG keys here
 
@@ -30,15 +30,15 @@ modules:
         - tmux
 
       # GNOME & Theming
-        - bibata-cursor-themes                                 # peterwu/rendezvous
+        #- bibata-cursor-themes                                 # peterwu/rendezvous
         - gnome-tweaks
 
       # Terminal & Shell Enhancements
-        - ghostty                                              # scottames/ghostty
-        - starship                                             # gloriouseggroll/nobara-43
+        #- ghostty                                              # scottames/ghostty
+        #- starship                                             # gloriouseggroll/nobara-43
 
       # Gaming Utilities
-        - faugus-launcher                                      # faugus/faugus-launcher
+        #- faugus-launcher                                      # faugus/faugus-launcher
         - gamemode
 
       # Container Tools & Docker
