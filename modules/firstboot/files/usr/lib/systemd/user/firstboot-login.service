@@ -1,6 +1,7 @@
 [Unit]
 Description=Run custom first login scripts
 After=graphical-session.target
+ConditionPathExists=!%h/.firstboot-login-done
 
 [Service]
 Type=oneshot

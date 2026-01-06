@@ -80,7 +80,9 @@ touch "$STAMP"
 # Combine boot and login results
 COMBINED_SUCCESS=$((BOOT_SUCCESS + SUCCESS_COUNT))
 COMBINED_TOTAL=$((BOOT_TOTAL + TOTAL_SCRIPTS))
-COMBINED_FAILED=("${BOOT_FAILED_SCRIPTS[@]}" "${FAILED_SCRIPTS[@]}")
+COMBINED_FAILED=()
+[[ ${#BOOT_FAILED_SCRIPTS[@]} -gt 0 ]] && COMBINED_FAILED+=("${BOOT_FAILED_SCRIPTS[@]}")
+[[ ${#FAILED_SCRIPTS[@]} -gt 0 ]] && COMBINED_FAILED+=("${FAILED_SCRIPTS[@]}")
 
 # Send completion notification
 if [[ ${#COMBINED_FAILED[@]} -eq 0 ]]; then

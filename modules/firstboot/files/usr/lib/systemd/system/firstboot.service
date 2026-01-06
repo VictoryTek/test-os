@@ -2,6 +2,7 @@
 Description=Run custom first boot scripts
 After=network-online.target
 Wants=network-online.target
+ConditionPathExists=!/var/lib/firstboot-done
 
 [Service]
 Type=oneshot
