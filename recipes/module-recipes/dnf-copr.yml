@@ -3,7 +3,7 @@
 modules:
   - type: dnf
     repos:
-      cleanup: false
+      cleanup: true
       copr:
         - faugus/faugus-launcher                          # provides: faugus-launcher
         - gloriouseggroll/nobara-43                       # (currently not needed for a specific package, but enabled)
@@ -11,17 +11,14 @@ modules:
         - peterwu/rendezvous                              # provides: rendezvous + Bibata cursor themes
 
     install:
-      options:
-        - --disablerepo=*                                 # block EVERYTHING by default
-        - --enablerepo=fedora                             # allow Fedora base
-        - --enablerepo=updates                            # allow Fedora updates
-        - --enablerepo=faugus-faugus-launcher
-        - --enablerepo=gloriouseggroll-nobara-43
-        - --enablerepo=scottames-ghostty
-        - --enablerepo=peterwu-rendezvous
-
       packages:
-        - ghostty                                         # from: scottames/ghostty
-        - faugus-launcher                                 # from: faugus/faugus-launcher
-        - rendezvous                                      # from: peterwu/rendezvous
-        - bibata-cursor-themes                            # from: peterwu/rendezvous                    
+        - repo: copr:copr.fedorainfracloud.org:scottames:ghostty
+          packages:
+            - ghostty
+        - repo: copr:copr.fedorainfracloud.org:faugus:faugus-launcher
+          packages:
+            - faugus-launcher
+        - repo: copr:copr.fedorainfracloud.org:peterwu:rendezvous
+          packages:
+            - rendezvous
+            - bibata-cursor-themes
