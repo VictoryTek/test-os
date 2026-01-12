@@ -4,13 +4,13 @@ install-nix:
     #!/usr/bin/bash
     set -euo pipefail
     echo "Installing Nix Package Manager..."
-    
+
     # Verify symlink exists (should be baked into image)
     if [ ! -L /nix ]; then
         echo "ERROR: /nix symlink not found. Image may not be built correctly."
         exit 1
     fi
-    
+
     # Create /var/nix directory structure if it doesn't exist
     if [ ! -d /var/nix ]; then
         echo "Creating /var/nix directory structure..."
@@ -19,7 +19,7 @@ install-nix:
         sudo chown root:nixbld /var/nix/store
         sudo chmod 755 /var/nix
     fi
-    
+
     # Run the installer with flags to skip what we've already done
     echo "Running Determinate Nix installer..."
     /usr/libexec/nix-installer install linux \
@@ -30,12 +30,12 @@ install-nix:
         --nix-build-user-count 32 \
         --nix-build-user-id-base 30000 \
         --nix-build-user-prefix nixbld
-    
+
     echo ""
     echo "Nix installation complete!"
     echo "Please log out and back in, or run: source /etc/profile.d/nix.sh"
 
-# Uninstall Nix Package Manager  
+# Uninstall Nix Package Manager
 [group("system")]
 uninstall-nix:
     #!/usr/bin/bash
