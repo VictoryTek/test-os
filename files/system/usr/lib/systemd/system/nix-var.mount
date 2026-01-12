@@ -1,0 +1,14 @@
+[Unit]
+Description=Bind mount writable /var/nix/var-nix over /nix/var/nix
+DefaultDependencies=no
+After=local-fs.target
+Before=nix-daemon.socket nix-daemon.service
+
+[Mount]
+What=/var/nix/var-nix
+Where=/nix/var/nix
+Type=none
+Options=bind
+
+[Install]
+WantedBy=local-fs.target
