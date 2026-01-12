@@ -4,11 +4,17 @@ set -euo pipefail
 
 echo "Running Nix installer on first login..."
 
-if [ -f /nix/nix-installer ]; then
+# Ensure the tmpfiles.d symlink is created
+if [ ! -L /nix ] && [ ! -d /nix ]; then
+    echo "Creating /nix symlink to /var/nix..."
+    sudo systemd-tmpfiles --create /usr/lib/tmpfiles.d/nix.conf
+fi
+
+if [ -f /usr/libexec/nix-installer ]; then
     # Use pkexec for graphical sudo prompt (works in user session)
-    pkexec /nix/nix-installer install linux --init none --no-confirm
+    pkexec /usr/libexec/nix-installer install linux --init none --no-confirm
     echo "Nix installation completed successfully"
 else
-    echo "ERROR: Nix installer not found at /nix/nix-installer"
+    echo "ERROR: Nix installer not found at /usr/libexec/nix-installer"
     exit 1
 fi

@@ -8,11 +8,13 @@ log() {
   echo "=== $* ==="
 }
 
-log "Creating /nix and downloading Determinate Nix installer"
+log "Downloading Determinate Nix installer to /usr/libexec"
 
-# Create /nix directory and download installer (following agate pattern)
-mkdir -p /nix && \
-	curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix -o /nix/nix-installer && \
-	chmod a+rx /nix/nix-installer
+# Download installer to /usr/libexec (part of the immutable image)
+# The actual /nix store will be created via tmpfiles.d symlink to /var/nix (writable)
+mkdir -p /usr/libexec
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix -o /usr/libexec/nix-installer && \
+	chmod a+rx /usr/libexec/nix-installer
 
-log "Nix installer ready at /nix/nix-installer"
+log "Nix installer ready at /usr/libexec/nix-installer"
+log "Note: /nix will be symlinked to /var/nix via tmpfiles.d on boot"
