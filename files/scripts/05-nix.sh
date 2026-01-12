@@ -8,11 +8,11 @@ log() {
   echo "=== $* ==="
 }
 
-log "Downloading Determinate Nix installer"
+log "Creating /nix and downloading Determinate Nix installer"
 
-# Download installer to /usr/libexec (part of the image)
-mkdir -p /usr/libexec
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix -o /usr/libexec/nix-installer && \
-	chmod a+rx /usr/libexec/nix-installer
+# Create /nix directory and download installer (following agate pattern)
+mkdir -p /nix && \
+	curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix -o /nix/nix-installer && \
+	chmod a+rx /nix/nix-installer
 
-log "Nix installer ready at /usr/libexec/nix-installer"
+log "Nix installer ready at /nix/nix-installer"

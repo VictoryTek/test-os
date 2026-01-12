@@ -23,6 +23,7 @@ modules:
         - blivet-gui
         - cockpit
         - fastfetch
+        - firefox
         - grsync
         - inxi
         - pavucontrol
