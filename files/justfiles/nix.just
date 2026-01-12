@@ -2,6 +2,7 @@
 [group("system")]
 install-nix:
     #!/usr/bin/bash
-    /nix/nix-installer install linux \
+    echo "Installing Nix Package Manager using Determinate Nix installer..."
+    /var/nix/nix-installer install linux \
         --init none \
         --no-confirm
