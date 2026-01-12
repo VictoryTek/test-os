@@ -8,13 +8,11 @@ log() {
   echo "=== $* ==="
 }
 
-log "Setting up Nix directory structure for immutable OS"
+log "Downloading Determinate Nix installer"
 
-# Create /var/nix directory that will persist across reboots
-mkdir -p /var/nix
+# Download installer to /usr/libexec (part of the image)
+mkdir -p /usr/libexec
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix -o /usr/libexec/nix-installer && \
+	chmod a+rx /usr/libexec/nix-installer
 
-# Download Determinate Nix installer to /var/nix so it persists
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix -o /var/nix/nix-installer && \
-	chmod a+rx /var/nix/nix-installer
-
-log "Nix installer ready at /var/nix/nix-installer"
+log "Nix installer ready at /usr/libexec/nix-installer"
