@@ -1,3 +1,6 @@
 cosign.key
 cosign.private
 /Containerfile
+
+# Ignore analysis directory
+analysis/

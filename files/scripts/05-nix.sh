@@ -8,8 +8,8 @@ log() {
   echo "=== $* ==="
 }
 
-log "Creating /nix and downloading determinite Nix installer."
+log "Creating /nix and downloading Determinate Nix installer."
 
 mkdir -p /nix && \
-	curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix -o /nix/determinate-nix-installer.sh && \
-	chmod a+rx /nix/determinate-nix-installer.sh
+	curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix -o /nix/nix-installer && \
+	chmod a+rx /nix/nix-installer
