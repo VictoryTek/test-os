@@ -31,49 +31,32 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 log "Nix installed successfully"
 
 # ============================================
-# Create systemd services for runtime
+# Verify Determinate Nix installation
 # ============================================
-log "Creating systemd service files for nix-daemon"
+log "Verifying Determinate Nix installation..."
 
-# nix-daemon.service (override the one from installer if needed)
-cat > /usr/lib/systemd/system/nix-daemon.service << 'EOF'
-[Unit]
-Description=Nix Daemon
-Documentation=man:nix-daemon https://docs.determinate.systems
-RequiresMountsFor=/nix/store
-RequiresMountsFor=/nix/var
-ConditionPathIsDirectory=/nix/store
+# The Determinate Nix installer creates:
+# - /usr/local/bin/determinate-nixd (the daemon binary)
+# - /etc/systemd/system/nix-daemon.service (service file)
+# - /etc/systemd/system/nix-daemon.socket (socket file)
+# - /etc/systemd/system/determinate-nixd.socket (additional socket)
 
-[Service]
-ExecStart=/nix/var/nix/profiles/default/bin/nix daemon
-KillMode=process
-LimitNOFILE=1048576
-TasksMax=infinity
-Restart=on-failure
+if [ -f /usr/local/bin/determinate-nixd ]; then
+    log "Found determinate-nixd binary at /usr/local/bin/determinate-nixd"
+else
+    log "WARNING: determinate-nixd binary not found!"
+fi
 
-[Install]
-WantedBy=multi-user.target
-EOF
+# List what the installer created
+log "Systemd units created by installer:"
+ls -la /etc/systemd/system/*nix* 2>/dev/null || echo "No nix systemd units found in /etc/systemd/system/"
+ls -la /usr/lib/systemd/system/*nix* 2>/dev/null || echo "No nix systemd units found in /usr/lib/systemd/system/"
 
-# nix-daemon.socket
-cat > /usr/lib/systemd/system/nix-daemon.socket << 'EOF'
-[Unit]
-Description=Nix Daemon Socket
-Documentation=man:nix-daemon https://docs.determinate.systems
-RequiresMountsFor=/nix/store
-RequiresMountsFor=/nix/var
-ConditionPathIsDirectory=/nix/store
-
-[Socket]
-ListenStream=/nix/var/nix/daemon-socket/socket
-
-[Install]
-WantedBy=sockets.target
-EOF
-
-# Enable services
-systemctl enable nix-daemon.socket
-systemctl enable nix-daemon.service
+# Enable the services created by the installer
+# (installer creates them in /etc/systemd/system/)
+log "Enabling nix-daemon services"
+systemctl enable nix-daemon.socket || log "nix-daemon.socket enable failed or not found"
+systemctl enable nix-daemon.service || log "nix-daemon.service enable failed or not found"
 
 log "Enabled nix-daemon services"
 
