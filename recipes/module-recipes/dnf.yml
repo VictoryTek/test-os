@@ -29,6 +29,7 @@ modules:
         - pavucontrol
         - tailscale
         - tmux
+        - virtualbox-guest-additions
 
       # GNOME & Theming
         #- bibata-cursor-themes                                 # peterwu/rendezvous
