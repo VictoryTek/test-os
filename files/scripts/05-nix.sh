@@ -8,7 +8,7 @@ log() {
   echo "=== $* ==="
 }
 
-log "Setting up Nix for immutable/atomic OS"
+log "Setting up Nix for immutable/atomic OS (bind mount approach)"
 
 # ============================================
 # 1. Download the Determinate Nix installer
@@ -20,11 +20,11 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 log "Nix installer downloaded to /usr/libexec/nix-installer"
 
 # ============================================
-# 2. Create /nix symlink to /var/nix
+# 2. Create /nix directory (NOT a symlink)
 # ============================================
-# This symlink becomes part of the immutable image, pointing to writable /var/nix
-log "Creating /nix -> /var/nix symlink (baked into image)"
-ln -sf /var/nix /nix
+# Create actual /nix directory as mount point for bind mount
+log "Creating /nix directory as mount point"
+mkdir -p /nix
 
 # ============================================
 # 3. Create nixbld group and build users
@@ -47,7 +47,7 @@ fi
 for i in $(seq 0 $((NIX_BUILD_USER_COUNT - 1))); do
     USER_NAME="${NIX_BUILD_USER_PREFIX}${i}"
     USER_ID=$((NIX_BUILD_USER_ID_BASE + i))
-    
+
     if ! id "${USER_NAME}" > /dev/null 2>&1; then
         useradd \
             --home-dir /var/empty \
@@ -66,7 +66,36 @@ done
 log "Created ${NIX_BUILD_USER_COUNT} nixbld users"
 
 # ============================================
-# 4. Create Nix configuration
+# 4. Create systemd mount unit for bind mount
+# ============================================
+log "Creating systemd mount unit for /nix bind mount"
+
+# nix.mount - bind mounts /var/nix to /nix
+cat > /usr/lib/systemd/system/nix.mount << 'EOF'
+[Unit]
+Description=Nix Package Manager Store
+DefaultDependencies=no
+After=local-fs.target
+Before=sysinit.target
+ConditionPathExists=/var/nix
+
+[Mount]
+What=/var/nix
+Where=/nix
+Type=none
+Options=bind
+
+[Install]
+WantedBy=local-fs.target
+EOF
+
+# Enable the mount unit
+systemctl enable nix.mount
+
+log "Created and enabled nix.mount"
+
+# ============================================
+# 5. Create Nix configuration
 # ============================================
 log "Creating Nix configuration"
 
@@ -84,7 +113,7 @@ EOF
 log "Created /etc/nix/nix.conf"
 
 # ============================================
-# 5. Create systemd service files
+# 6. Create systemd service files for nix-daemon
 # ============================================
 log "Creating systemd service files for nix-daemon"
 
@@ -93,6 +122,8 @@ cat > /usr/lib/systemd/system/nix-daemon.service << 'EOF'
 [Unit]
 Description=Nix Daemon
 Documentation=man:nix-daemon https://docs.determinate.systems
+After=nix.mount
+Requires=nix.mount
 RequiresMountsFor=/nix/store
 RequiresMountsFor=/nix/var
 ConditionPathIsReadWrite=/nix/var/nix/daemon-socket
@@ -112,6 +143,8 @@ cat > /usr/lib/systemd/system/nix-daemon.socket << 'EOF'
 [Unit]
 Description=Nix Daemon Socket
 Documentation=man:nix-daemon https://docs.determinate.systems
+After=nix.mount
+Requires=nix.mount
 RequiresMountsFor=/nix/store
 RequiresMountsFor=/nix/var
 ConditionPathIsReadWrite=/nix/var/nix/daemon-socket
@@ -126,7 +159,7 @@ EOF
 log "Created nix-daemon.service and nix-daemon.socket"
 
 # ============================================
-# 6. Create shell profile scripts
+# 7. Create shell profile scripts
 # ============================================
 log "Creating shell profile scripts"
 
@@ -139,7 +172,8 @@ if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
 fi
 EOF
 
-cat > /etc/bash.bashrc.d/nix.sh << 'EOF' 2>/dev/null || mkdir -p /etc/bash.bashrc.d && cat > /etc/bash.bashrc.d/nix.sh << 'EOF'
+mkdir -p /etc/bash.bashrc.d
+cat > /etc/bash.bashrc.d/nix.sh << 'EOF'
 # Nix bash configuration
 if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
     . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
@@ -149,18 +183,13 @@ EOF
 # Fish shell support
 mkdir -p /etc/fish/conf.d
 cat > /etc/fish/conf.d/nix.fish << 'EOF'
-# Nix fish configuration  
+# Nix fish configuration
 if test -e '/nix/var/nix/profiles/default/etc/fish/conf.d/nix-daemon.fish'
     source '/nix/var/nix/profiles/default/etc/fish/conf.d/nix-daemon.fish'
 end
 EOF
 
 log "Created shell profile scripts"
-
-# ============================================
-# 7. Set up tmpfiles.d for runtime directories
-# ============================================
-log "tmpfiles.d will create /var/nix at boot"
 
 log "========================================"
 log "Nix pre-configuration complete!"
