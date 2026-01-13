@@ -31,6 +31,34 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 log "Nix installed successfully"
 
 # ============================================
+# Create systemd mount unit for writable daemon-socket
+# ============================================
+# The mount unit name must match the mount path with slashes as dashes
+# /nix/var/nix/daemon-socket -> nix-var-nix-daemon\x2dsocket.mount
+# (systemd escapes the dash after "daemon" as \x2d)
+
+log "Creating systemd mount unit for daemon-socket tmpfs"
+
+cat > '/usr/lib/systemd/system/nix-var-nix-daemon\x2dsocket.mount' << 'EOF'
+[Unit]
+Description=Tmpfs for Nix daemon socket
+DefaultDependencies=no
+After=local-fs.target
+Before=nix-daemon.socket nix-daemon.service
+
+[Mount]
+What=tmpfs
+Where=/nix/var/nix/daemon-socket
+Type=tmpfs
+Options=mode=0755
+
+[Install]
+WantedBy=local-fs.target
+EOF
+
+log "Created mount unit"
+
+# ============================================
 # Create systemd service files
 # ============================================
 # With --init none, the installer doesn't create systemd units,
@@ -76,8 +104,8 @@ log "Created systemd service files"
 # ============================================
 # Enable services
 # ============================================
-log "Enabling nix-var-nix-daemon\\x2dsocket.mount for writable socket directory"
-systemctl enable nix-var-nix-daemon\\x2dsocket.mount
+log "Enabling mount and daemon services"
+systemctl enable 'nix-var-nix-daemon\x2dsocket.mount'
 
 log "Enabling nix-daemon services"
 systemctl enable nix-daemon.socket
