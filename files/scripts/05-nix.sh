@@ -42,8 +42,8 @@ cat > /usr/lib/systemd/system/nix-daemon.service << 'EOF'
 [Unit]
 Description=Nix Daemon
 Documentation=man:nix-daemon https://docs.determinate.systems
-After=nix-var-nix.mount
-Requires=nix-var-nix.mount
+After=nix-var-nix-daemon\x2dsocket.mount
+Requires=nix-var-nix-daemon\x2dsocket.mount
 ConditionPathIsDirectory=/nix/store
 
 [Service]
@@ -60,8 +60,8 @@ cat > /usr/lib/systemd/system/nix-daemon.socket << 'EOF'
 [Unit]
 Description=Nix Daemon Socket
 Documentation=man:nix-daemon https://docs.determinate.systems
-After=nix-var-nix.mount
-Requires=nix-var-nix.mount
+After=nix-var-nix-daemon\x2dsocket.mount
+Requires=nix-var-nix-daemon\x2dsocket.mount
 ConditionPathIsDirectory=/nix/store
 
 [Socket]
@@ -76,8 +76,8 @@ log "Created systemd service files"
 # ============================================
 # Enable services
 # ============================================
-log "Enabling nix-var-nix.mount for writable state directory"
-systemctl enable nix-var-nix.mount
+log "Enabling nix-var-nix-daemon\\x2dsocket.mount for writable socket directory"
+systemctl enable nix-var-nix-daemon\\x2dsocket.mount
 
 log "Enabling nix-daemon services"
 systemctl enable nix-daemon.socket
