@@ -31,6 +31,22 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 log "Nix installed successfully"
 
 # ============================================
+# Fix SELinux contexts for Nix binaries
+# ============================================
+# The nix store binaries have default_t context which SELinux blocks
+# systemd (init_t) from executing. Relabel to bin_t to allow execution.
+
+log "Setting SELinux contexts for Nix binaries"
+
+# Find and relabel all executables in /nix/store
+find /nix/store -type f -perm /111 -exec chcon -t bin_t {} \; 2>/dev/null || true
+
+# Also relabel the profile symlink targets
+chcon -t bin_t /nix/var/nix/profiles/default/bin/* 2>/dev/null || true
+
+log "SELinux contexts set"
+
+# ============================================
 # Create systemd mount unit for writable daemon-socket
 # ============================================
 # The mount unit name must match the mount path with slashes as dashes
