@@ -26,7 +26,8 @@ modules:
   #- from-file: module-recipes/cosmic/cosmic-config.yml
   #- from-file: module-recipes/gschema-overrides.yml
   - from-file: module-recipes/dnf.yml
-  #- from-file: module-recipes/scripts.yml
+  - from-file: module-recipes/scripts.yml
+  - from-file: module-recipes/just.yml
   #- from-file: module-recipes/yafti.yml
   
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
