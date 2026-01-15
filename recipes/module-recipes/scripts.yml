@@ -4,3 +4,4 @@ scripts:
   - 02-kora-icon-theme.sh
   - 03-photogimp.sh
   - 04-purge-autostart.sh
+  - 05-nix.sh

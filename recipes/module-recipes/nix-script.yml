@@ -1,8 +1,0 @@
----
-# yaml-language-server: $schema=https://schema.blue-build.org/module-list-v1.json
-
-modules:
-  - type: script
-    scripts:
-      - 05-nix.sh
-  # Removed justfiles section for nix.just, as it is no longer needed
