@@ -1,0 +1,13 @@
+{
+  "name": "Sleep Through Notifications",
+  "uuid": "sleep-through-notifications@victorytek.github.io",
+  "description": "Disable the screen-waking behavior of lock screen notifications",
+  "shell-version":
+    [ "45"
+    , "46"
+    , "47"
+    , "48"
+    , "49"
+    ],
+  "url": "https://gitlab.gnome.org/rhendric/sleep-through-notifications"
+}

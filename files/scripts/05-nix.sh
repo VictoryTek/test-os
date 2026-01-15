@@ -31,22 +31,6 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 log "Nix installed successfully"
 
 # ============================================
-# Fix SELinux contexts for Nix binaries
-# ============================================
-# The nix store binaries have default_t context which SELinux blocks
-# systemd (init_t) from executing. Relabel to bin_t to allow execution.
-
-log "Setting SELinux contexts for Nix binaries"
-
-# Find and relabel all executables in /nix/store
-find /nix/store -type f -perm /111 -exec chcon -t bin_t {} \; 2>/dev/null || true
-
-# Also relabel the profile symlink targets
-chcon -t bin_t /nix/var/nix/profiles/default/bin/* 2>/dev/null || true
-
-log "SELinux contexts set"
-
-# ============================================
 # Create systemd mount unit for writable daemon-socket
 # ============================================
 # The mount unit name must match the mount path with slashes as dashes
@@ -75,6 +59,23 @@ EOF
 log "Created mount unit"
 
 # ============================================
+# Create wrapper script for nix-daemon
+# ============================================
+# Scripts in /usr/libexec get proper SELinux context (bin_t)
+# This allows systemd to execute them without SELinux issues
+
+log "Creating nix-daemon wrapper script"
+
+mkdir -p /usr/libexec
+cat > /usr/libexec/nix-daemon << 'EOF'
+#!/bin/bash
+exec /nix/var/nix/profiles/default/bin/nix daemon "$@"
+EOF
+chmod +x /usr/libexec/nix-daemon
+
+log "Created wrapper script"
+
+# ============================================
 # Create systemd service files
 # ============================================
 # With --init none, the installer doesn't create systemd units,
@@ -91,7 +92,7 @@ Requires=nix-var-nix-daemon\x2dsocket.mount
 ConditionPathIsDirectory=/nix/store
 
 [Service]
-ExecStart=/nix/var/nix/profiles/default/bin/nix daemon
+ExecStart=/usr/libexec/nix-daemon
 KillMode=process
 LimitNOFILE=1048576
 TasksMax=infinity
