@@ -5,7 +5,4 @@ modules:
   - type: script
     scripts:
       - 05-nix.sh
-  - type: justfiles
-    validate: true
-    include:
-      - nix.just
+  # Removed justfiles section for nix.just, as it is no longer needed

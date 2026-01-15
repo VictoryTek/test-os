@@ -18,7 +18,7 @@ modules:
       ID: vex-test_os
       PRETTY_NAME: VexTestOS
 
-  - from-file: module-recipes/firstboot.yml
+  #- from-file: module-recipes/firstboot.yml
   - from-file: module-recipes/files.yml
   - from-file: module-recipes/nix-script.yml
   #- from-file: module-recipes/cosmic/remove-gnome.yml

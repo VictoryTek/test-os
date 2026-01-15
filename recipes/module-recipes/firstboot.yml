@@ -7,9 +7,7 @@ modules:
     scripts:
       - name: 00-test.sh
         mode: system
-      - name: 01-install-nix.sh
-        mode: user
-        when: login
+      # Removed 01-install-nix.sh, no longer used
         
   - type: systemd
     system:
