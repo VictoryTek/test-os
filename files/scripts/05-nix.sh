@@ -8,15 +8,16 @@ log() {
   echo "=== $* ==="
 }
 
-log "Installing Determinate Nix (ostree planner)"
+log "Downloading Nix installer for firstboot installation"
 
-# Use ostree planner which creates proper systemd units for immutable systems
-# It will create nix-directory.service, nix.mount, and ensure-symlinked-units-resolve.service
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | \
-    sh -s -- install ostree \
-    --determinate \
-    --no-confirm
+# Download installer for manual installation after first boot
+# Container builds don't have systemd, so ostree planner cannot run
+mkdir -p /usr/share/nix-installer
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix \
+    -o /usr/share/nix-installer/install.sh
+chmod +x /usr/share/nix-installer/install.sh
 
 log "========================================"
-log "Nix installation complete!"
+log "Nix installer ready at /usr/share/nix-installer/install.sh"
+log "Run 'ujust install-nix' after first boot"
 log "========================================"
