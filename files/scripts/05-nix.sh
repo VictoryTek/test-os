@@ -24,7 +24,7 @@ log "Downloading and running Determinate Nix installer (ostree planner)..."
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | \
     sh -s -- install ostree \
     --no-confirm \
-    --no-start-daemon \
+    --init none \
     --nix-build-group-id 30000 \
     --nix-build-group-name nixbld \
     --nix-build-user-count 32 \
