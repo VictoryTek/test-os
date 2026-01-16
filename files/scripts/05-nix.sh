@@ -8,30 +8,20 @@ log() {
   echo "=== $* ==="
 }
 
-log "Installing Nix during image build"
+log "Installing Determinate Nix during image build"
 
-# ============================================
-# Run the Determinate Nix installer for OSTree systems
-# ============================================
-# The 'ostree' planner handles all OSTree-specific requirements:
-# - Proper systemd service setup
-# - SELinux contexts
-# - Writable mount points
-# - Profile scripts
-
-log "Downloading and running Determinate Nix installer (ostree planner)..."
+# Official approach from Determinate Systems docs for container builds
+# Uses --init none (no systemd during build) with --determinate flag
+# This installs determinate-nixd instead of standard nix-daemon
+# Reference: https://docs.determinate.systems/guides/buildkite
 
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | \
-    sh -s -- install ostree \
+    sh -s -- install linux \
+    --determinate \
     --no-confirm \
-    --init none \
-    --nix-build-group-id 30000 \
-    --nix-build-group-name nixbld \
-    --nix-build-user-count 32 \
-    --nix-build-user-id-base 30000 \
-    --nix-build-user-prefix nixbld
+    --init none
 
 log "========================================"
 log "Nix installation complete!"
-log "The ostree planner handled all setup automatically."
+log "Daemon will start automatically on boot via systemd"
 log "========================================"
