@@ -10,11 +10,8 @@ log() {
 
 log "Installing Determinate Nix during image build"
 
-# Official approach from Determinate Systems docs for container builds
-# Uses --init none (no systemd during build) with --determinate flag
-# This installs determinate-nixd instead of standard nix-daemon
-# Reference: https://docs.determinate.systems/guides/buildkite
-
+# Phase 1: Install Nix without systemd (container build limitation)
+# Phase 2: A oneshot systemd service will complete setup on first boot
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | \
     sh -s -- install linux \
     --determinate \
@@ -22,6 +19,6 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
     --init none
 
 log "========================================"
-log "Nix installation complete!"
-log "Daemon will start automatically on boot via systemd"
+log "Nix binaries installed!"
+log "Systemd units will be created on first boot"
 log "========================================"
