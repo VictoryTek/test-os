@@ -2,4 +2,5 @@ modules:
   - type: justfiles
     validate: false
     include:
-    - nix.just
+    # - nix.just  # Commented out - using agate approach instead
+    - nix-install.just  # Agate approach: manual install via just
