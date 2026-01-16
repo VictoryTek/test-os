@@ -1,9 +1,0 @@
-[Unit]
-Description=Nix Daemon Socket
-Documentation=https://nixos.org/manual/nix/stable/
-
-[Socket]
-ListenStream=/nix/var/nix/daemon-socket/socket
-
-[Install]
-WantedBy=sockets.target
