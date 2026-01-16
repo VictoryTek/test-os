@@ -4,5 +4,4 @@ scripts:
   - 02-kora-icon-theme.sh
   - 03-photogimp.sh
   - 04-purge-autostart.sh
-  # - 05-nix.sh  # Commented out - using agate approach instead
-  - nix-download.sh  # Agate approach: just download installer
+  - 05-nix.sh

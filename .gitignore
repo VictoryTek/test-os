@@ -4,3 +4,6 @@ cosign.private
 
 # Ignore analysis directory
 analysis/
+
+# Ignore screenshots directory
+screenshots/
