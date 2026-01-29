@@ -13,7 +13,7 @@ modules:
         #- atim/starship
         #- gloriouseggroll/nobara-43
         #- scottames/ghostty
-        #- peterwu/rendezvous
+        - peterwu/rendezvous
 
       # Put any repo GPG keys here
 
@@ -32,7 +32,7 @@ modules:
         - virtualbox-guest-additions
 
       # GNOME & Theming
-        #- bibata-cursor-themes                                 # peterwu/rendezvous
+        - bibata-cursor-themes                                 # peterwu/rendezvous
         - gnome-tweaks
 
       # Terminal & Shell Enhancements
