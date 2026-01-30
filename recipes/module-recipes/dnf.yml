@@ -10,7 +10,7 @@ modules:
 
       copr:
         - faugus/faugus-launcher
-        - gloriouseggroll/nobara-43
+        #- gloriouseggroll/nobara-43
         - scottames/ghostty
         - peterwu/rendezvous
 
