@@ -9,13 +9,13 @@ modules:
         - https://download.docker.com/linux/fedora/docker-ce.repo
 
       copr:
-        - faugus/faugus-launcher
+        - name: faugus/faugus-launcher
           chroot: fedora-43-x86_64
-        - gloriouseggroll/nobara-43
+        - name: gloriouseggroll/nobara-43
           chroot: fedora-43-x86_64
-        - scottames/ghostty
+        - name: scottames/ghostty
           chroot: fedora-43-x86_64
-        - peterwu/rendezvous
+        - name: peterwu/rendezvous
           chroot: fedora-43-x86_64
 
       # Put any repo GPG keys here
