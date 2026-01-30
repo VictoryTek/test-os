@@ -10,13 +10,9 @@ modules:
 
       copr:
         - faugus/faugus-launcher
-          ID_LIKE: fedora
         - gloriouseggroll/nobara-43
-          ID_LIKE: fedora
         - scottames/ghostty
-          ID_LIKE: fedora
         - peterwu/rendezvous
-          ID_LIKE: fedora
 
       # Put any repo GPG keys here
 

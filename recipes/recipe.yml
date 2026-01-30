@@ -16,6 +16,7 @@ modules:
     properties:
       NAME: Vex-Test-OS
       ID: vex-test_os
+      ID_LIKE: fedora
       PRETTY_NAME: VexTestOS
 
   #- from-file: module-recipes/firstboot.yml
