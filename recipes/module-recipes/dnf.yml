@@ -10,9 +10,13 @@ modules:
 
       copr:
         - faugus/faugus-launcher
+          chroot: fedora-43-x86_64
         - gloriouseggroll/nobara-43
+          chroot: fedora-43-x86_64
         - scottames/ghostty
+          chroot: fedora-43-x86_64
         - peterwu/rendezvous
+          chroot: fedora-43-x86_64
 
       # Put any repo GPG keys here
 
