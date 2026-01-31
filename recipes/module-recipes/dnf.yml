@@ -32,7 +32,7 @@ modules:
 
       # GNOME & Theming
         - bibata-cursor-themes                                 # peterwu/rendezvous
-        - gnome-tweaks
+        #- gnome-tweaks
 
       # Terminal & Shell Enhancements
         - ghostty                                              # scottames/ghostty
