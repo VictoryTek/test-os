@@ -1,5 +1,6 @@
 type: script
 scripts:
+  - 06-cachyos-kernel.sh
   - 01-purge-waydroid.sh
   - 02-kora-icon-theme.sh
   - 03-photogimp.sh
